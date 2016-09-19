@@ -6,13 +6,13 @@ Run test queries.
 Test your exposure security with a easy toggle.
 
 
-Setting up
-----------
+## Setting up
 
 ```
 meteor add cultofcoders:grapher-live
 ```
 
+### Server Side Setup
 ```
 // in your /imports/startup/server
 // don't initialize it in your production environment, or it will lead to unwanted data exposure.
@@ -22,6 +22,8 @@ import { initialize } from 'meteor/cultofcoders:grapher-live';
 initialize(); // exposes a method "grapher_live", used by the React Component
 ```
 
+
+### Client Side Setup
 ```
 // client side expose a route using your router
 // example with FlowRouter
