@@ -36,3 +36,23 @@ FlowRouter.route('/grapher', () => {
     render(<GrapherLive />, document.getElementById('app')); // where app is your main id to render stuff (you can also use "render-target")
 })
 ```
+
+### Usage
+
+Grapher Live uses *createQuery*:
+
+```
+// query
+{
+    tasks: {
+        $filter({filters, params}) {
+            filters.isChecked = params.isChecked;
+        }
+    }
+}
+
+// params example
+{
+    isChecked: true
+}
+```
