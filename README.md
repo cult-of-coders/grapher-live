@@ -10,6 +10,8 @@ Test your exposure security with a easy toggle.
 
 ```
 meteor add cultofcoders:grapher-live
+
+meteor npm install --save react react-ace react-json-pretty
 ```
 
 ### Server Side Setup

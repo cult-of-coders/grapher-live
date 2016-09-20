@@ -13,7 +13,9 @@ class Live extends React.Component {
         super();
 
         this.state = {
-            result: [],
+            loading: false,
+            timeElapsed: null,
+            result: null,
             error: null,
             checkUser: true
         };
@@ -77,10 +79,12 @@ class Live extends React.Component {
                         <div className="name">Results</div>
 
                         <div className="results">
-                            {this.state.error
-                                ? <div className="error">{this.state.error}</div>
-                                : <JSONPretty json={this.state.result} />
-                            }
+                            <LiveResults loading={this.state.loading}
+                                         error={this.state.error}
+                                         result={this.state.result}
+                                         timeElapsed={this.state.timeElapsed}
+                                         queryTimeElapsed={this.state.queryTimeElapsed}
+                                     />
                         </div>
                     </div>
                 </div>
@@ -107,11 +111,19 @@ class Live extends React.Component {
             const body = eval('(' + this.state.body + ')');
             const params = eval('(' + this.state.params + ')');
             const checkUser = this.state.checkUser;
+            const start = new Date();
 
-            Meteor.call('grapher.live', {body, params, checkUser}, (error, result) => {
+            this.setState({loading: true});
+
+            Meteor.call('grapher.live', {body, params, checkUser}, (error, response) => {
+                this.setState({loading: false});
+
                 if (!error) {
+                    const end = new Date();
                     this.setState({
-                        result,
+                        timeElapsed: (end.getTime() - start.getTime()),
+                        queryTimeElapsed: response.timeElapsedMs,
+                        result: response.data,
                         error: null
                     })
                 } else {
@@ -125,6 +137,29 @@ class Live extends React.Component {
         }
     }
 }
+
+const LiveResults = ({loading, result, error, timeElapsed, queryTimeElapsed}) => {
+    if (loading) {
+        return <div className="loading">Please wait...</div>
+    }
+
+    if (error) {
+        return <div className="error">{error}</div>
+    }
+
+    if (!result) {
+        return <div>Run your query in { } in the left and press the "Run" button on top.</div>
+    }
+
+    return (
+        <div>
+            <div>Time for response: {timeElapsed} ms.</div>
+            <div>Time for db query: {queryTimeElapsed} ms.</div>
+            <hr/>
+            <JSONPretty json={result} />
+        </div>
+    )
+};
 
 export default createContainer(() => {
     return {

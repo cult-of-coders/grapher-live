@@ -96,6 +96,7 @@
 .grapher-live-container > .section .results {
   margin-left: 20px;
   overflow-y: auto;
+  color: #FFF;
 }
 .grapher-live-container > .section .name {
   position: absolute;
