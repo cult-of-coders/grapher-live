@@ -16,7 +16,6 @@ Package.onUse(function(api) {
   api.use('tmeasday:check-npm-versions@0.3.1');
   api.use('react-meteor-data@0.2.9');
   api.imply('react-meteor-data@0.2.9');
-  api.use('cultofcoders:grapher@1.0.7');
 
   api.mainModule('main.client.js', 'client');
   api.mainModule('main.server.js', 'server');
