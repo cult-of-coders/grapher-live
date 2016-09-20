@@ -4,7 +4,7 @@ import { checkNpmVersions } from 'meteor/tmeasday:check-npm-versions';
 checkNpmVersions({
     'react-json-pretty': '1.2.x',
     'react-ace': '3.x.x',
-    'react': '0.15.x'
+    'react': '15.x.x'
 }, 'cultofcoders:grapher-live');
 
 export {
