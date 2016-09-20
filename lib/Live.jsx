@@ -17,12 +17,26 @@ class Live extends React.Component {
             timeElapsed: null,
             result: null,
             error: null,
-            checkUser: true
+            checkUser: true,
+            body: "{\n\t\n}",
+            params: "{\n\t\n}"
         };
     }
 
     render() {
         const {user} = this.props;
+        const editorOpts = {
+            $blockScrolling: false,
+            showPrintMargin: false,
+            fontSize: 18
+        };
+        const commands = [{
+            name: 'save',
+            bindKey: {win: "Ctrl-Enter", "mac": "Cmd-Enter"},
+            exec: (editor) => {
+                this.onRun()
+            }
+        }];
 
         return (
             <div className="grapher-live-container">
@@ -42,6 +56,24 @@ class Live extends React.Component {
                     }
 
                     <button onClick={this.onRun.bind(this)} className="run-query">Run</button>
+                    &nbsp;
+                    <span>(Use Ctrl+Enter or Cmd+Enter)</span>
+                </div>
+                <div className="section">
+                    <div className="wrap">
+                        <div className="name">Parameters</div>
+                        <AceEditor
+                            mode="javascript"
+                            theme="monokai"
+                            name="params"
+                            value={this.state.params}
+                            onChange={this.onChangeParams.bind(this)}
+                            height='600px'
+                            width='100%'
+                            setOptions={editorOpts}
+                            commands={commands}
+                            />,
+                    </div>
                 </div>
                 <div className="section">
                     <div className="wrap">
@@ -52,26 +84,11 @@ class Live extends React.Component {
                             name="body"
                             value={this.state.body}
                             onChange={this.onChangeBody.bind(this)}
-                            height='50vh'
+                            height='600px'
                             width='100%'
-                            editorProps={{$blockScrolling: false}}
-                        />
-                    </div>
-
-                    <hr/>
-
-                    <div className="wrap">
-                        <div className="name">Parameters</div>
-                        <AceEditor
-                            mode="javascript"
-                            theme="monokai"
-                            name="params"
-                            value={this.state.params}
-                            onChange={this.onChangeParams.bind(this)}
-                            height='20vh'
-                            width='100%'
-                            editorProps={{$blockScrolling: false}}
-                            />,
+                            setOptions={editorOpts}
+                            commands={commands}
+                            />
                     </div>
                 </div>
                 <div className="section">
@@ -108,6 +125,8 @@ class Live extends React.Component {
 
     onRun() {
         try {
+            console.log(this.state.body, this.state.params);
+
             const body = eval('(' + this.state.body + ')');
             const params = eval('(' + this.state.params + ')');
             const checkUser = this.state.checkUser;
@@ -116,6 +135,7 @@ class Live extends React.Component {
             this.setState({loading: true});
 
             Meteor.call('grapher.live', {body, params, checkUser}, (error, response) => {
+                console.log('response');
                 this.setState({loading: false});
 
                 if (!error) {

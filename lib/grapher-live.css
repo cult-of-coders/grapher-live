@@ -1,4 +1,3 @@
-(node) util.print is deprecated. Use console.log instead.
 .breaks {
   color: #FFF;
 }
@@ -79,7 +78,7 @@
 }
 .grapher-live-container > .section {
   float: left;
-  width: 50%;
+  width: 33%;
   overflow-y: auto;
 }
 .grapher-live-container > .section hr {
