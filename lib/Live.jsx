@@ -125,8 +125,6 @@ class Live extends React.Component {
 
     onRun() {
         try {
-            console.log(this.state.body, this.state.params);
-
             const body = eval('(' + this.state.body + ')');
             const params = eval('(' + this.state.params + ')');
             const checkUser = this.state.checkUser;
@@ -135,7 +133,6 @@ class Live extends React.Component {
             this.setState({loading: true});
 
             Meteor.call('grapher.live', {body, params, checkUser}, (error, response) => {
-                console.log('response');
                 this.setState({loading: false});
 
                 if (!error) {
