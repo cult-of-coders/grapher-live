@@ -6,7 +6,7 @@ import {createContainer} from 'meteor/react-meteor-data';
 import {Meteor} from 'meteor/meteor';
 
 import 'brace/mode/javascript';
-import 'brace/theme/monokai';
+import 'brace/theme/github';
 
 class Live extends React.Component {
     constructor() {
@@ -41,7 +41,7 @@ class Live extends React.Component {
         return (
             <div className="grapher-live-container">
                 <div className="grapher-top-bar">
-                    <span className="title">Grapher Live</span>
+                    <span className="title">Grapher Live!</span>
 
                     <span className="check-user">
                         <input type="checkbox" onChange={this.onCheckForUser.bind(this)} />
@@ -64,7 +64,7 @@ class Live extends React.Component {
                         <div className="name">Parameters</div>
                         <AceEditor
                             mode="javascript"
-                            theme="monokai"
+                            theme="github"
                             name="params"
                             value={this.state.params}
                             onChange={this.onChangeParams.bind(this)}
