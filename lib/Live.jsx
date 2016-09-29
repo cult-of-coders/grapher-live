@@ -1,5 +1,4 @@
 import React from 'react';
-import JSONPretty from 'react-json-pretty';
 import brace from 'brace';
 import AceEditor from 'react-ace';
 import {createContainer} from 'meteor/react-meteor-data';
