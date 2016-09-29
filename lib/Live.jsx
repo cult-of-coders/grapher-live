@@ -8,6 +8,12 @@ import {Meteor} from 'meteor/meteor';
 import 'brace/mode/javascript';
 import 'brace/theme/github';
 
+const editorOpts = {
+    $blockScrolling: false,
+    showPrintMargin: false,
+    fontSize: 18
+};
+
 class Live extends React.Component {
     constructor() {
         super();
@@ -25,11 +31,6 @@ class Live extends React.Component {
 
     render() {
         const {user} = this.props;
-        const editorOpts = {
-            $blockScrolling: false,
-            showPrintMargin: false,
-            fontSize: 18
-        };
         const commands = [{
             name: 'save',
             bindKey: {win: "Ctrl-Enter", "mac": "Cmd-Enter"},
@@ -41,26 +42,41 @@ class Live extends React.Component {
         return (
             <div className="grapher-live-container">
                 <div className="grapher-top-bar">
-                    <span className="title">Grapher Live!</span>
+                    <div className="vertical-center-wrap">
+                        <div className="vertical-center">
+                            <div>
+                                <span className="title">Grapher Live!</span>
 
-                    <span className="check-user">
-                        <input type="checkbox" onChange={this.onCheckForUser.bind(this)} />
-                        <span>
-                            Fetch without expose restrictions
-                        </span>
-                    </span>
+                                <button onClick={this.onRun.bind(this)} className="run-query">Run</button>
+                                {user
+                                    ? <span className="logged-in">Logged in as: {user.emails[0].address}</span>
+                                    : <span className="logged-in">Not logged in</span>
+                                }
 
-                    {user
-                        ? <span className="logged-in">Logged in as: {user.emails[0].address}</span>
-                        : <span className="logged-in">Not logged in</span>
-                    }
-
-                    <button onClick={this.onRun.bind(this)} className="run-query">Run</button>
-                    &nbsp;
-                    <span>(Use Ctrl+Enter or Cmd+Enter)</span>
+                                <span className="check-user">
+                                    <input type="checkbox" onChange={this.onCheckForUser.bind(this)} />
+                                    <span>
+                                        Bypass exposure firewall
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="section">
-                    <div className="wrap">
+                <div className="left">
+                    <div className="grapher-live-query wrap">
+                        <div className="name">Query</div>
+                        <AceEditor
+                            mode="javascript"
+                            theme="github"
+                            name="body"
+                            value={this.state.body}
+                            onChange={this.onChangeBody.bind(this)}
+                            setOptions={editorOpts}
+                            commands={commands}
+                            />
+                    </div>
+                    <div className="grapher-live-parameters wrap">
                         <div className="name">Parameters</div>
                         <AceEditor
                             mode="javascript"
@@ -68,41 +84,19 @@ class Live extends React.Component {
                             name="params"
                             value={this.state.params}
                             onChange={this.onChangeParams.bind(this)}
-                            height='600px'
-                            width='100%'
-                            setOptions={editorOpts}
-                            commands={commands}
-                            />,
-                    </div>
-                </div>
-                <div className="section">
-                    <div className="wrap">
-                        <div className="name">Query</div>
-                        <AceEditor
-                            mode="javascript"
-                            theme="monokai"
-                            name="body"
-                            value={this.state.body}
-                            onChange={this.onChangeBody.bind(this)}
-                            height='600px'
-                            width='100%'
                             setOptions={editorOpts}
                             commands={commands}
                             />
                     </div>
                 </div>
-                <div className="section">
-                    <div className="wrap">
-                        <div className="name">Results</div>
-
-                        <div className="results">
-                            <LiveResults loading={this.state.loading}
-                                         error={this.state.error}
-                                         result={this.state.result}
-                                         timeElapsed={this.state.timeElapsed}
-                                         queryTimeElapsed={this.state.queryTimeElapsed}
-                                     />
-                        </div>
+                <div className="right">
+                    <div className="grapher-live-results">
+                        <LiveResults loading={this.state.loading}
+                                     error={this.state.error}
+                                     result={this.state.result}
+                                     timeElapsed={this.state.timeElapsed}
+                                     queryTimeElapsed={this.state.queryTimeElapsed}
+                                 />
                     </div>
                 </div>
             </div>
@@ -165,15 +159,30 @@ const LiveResults = ({loading, result, error, timeElapsed, queryTimeElapsed}) =>
     }
 
     if (!result) {
-        return <div>Run your query in { } in the left and press the "Run" button on top.</div>
+        return <div className="vertical-center-wrap">
+            <div className="vertical-center blank">
+                Run your query in the left and press the "Run" button on top or just write Ctrl+Enter or Cmd+Enter.
+            </div>
+        </div>
     }
 
     return (
         <div>
-            <div>Time for response: {timeElapsed} ms.</div>
-            <div>Time for db query: {queryTimeElapsed} ms.</div>
-            <hr/>
-            <JSONPretty json={result} />
+            <div className="insight">
+                <div className="vertical-center-wrap">
+                    <div className="vertical-center">
+                        <div>Grapher execution time: {queryTimeElapsed} ms.</div>
+                        <div>Full response time: {timeElapsed} ms.</div>
+                    </div>
+                </div>
+            </div>
+            <AceEditor
+                mode="javascript"
+                theme="github"
+                name="results-editor"
+                value={JSON.stringify(result, null, '\t')}
+                setOptions={editorOpts}
+            />
         </div>
     )
 };

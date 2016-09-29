@@ -1,6 +1,6 @@
 Package.describe({
   name: 'cultofcoders:grapher-live',
-  version: '1.1.1',
+  version: '1.1.2',
   // Brief, one-line summary of the package.
   summary: 'Grapher Live - Visualize your queries in the browser',
   // URL to the Git repository containing the source code for this package.
@@ -16,6 +16,7 @@ Package.onUse(function(api) {
   api.use('tmeasday:check-npm-versions@0.3.1');
   api.use('react-meteor-data@0.2.9');
   api.use('cultofcoders:grapher@1.1.0');
+  api.use('less');
   api.imply('react-meteor-data@0.2.9');
 
   api.mainModule('main.client.js', 'client');
