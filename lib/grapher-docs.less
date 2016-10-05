@@ -1,0 +1,91 @@
+.grapher-documentation {
+  height: 90vh;
+  overflow-y: auto;
+}
+
+.grapher-docs {
+  position: relative;
+
+  > h1 {
+    color: #e2e2e2;
+    font-family: 'monospace';
+    text-align: right;
+    padding-right: 10px;
+    text-transform: uppercase;
+    font-size: 2em;
+    margin-top: 5px;
+  }
+
+  table {
+    width: 90%;
+    margin: 5%;
+    border: 3px solid #444;
+    th {
+      width: 50%;
+      background: #777;
+      color: #FFF;
+    }
+    th, td {
+      padding: 10px 10px;
+      border-bottom: 1px dotted #CCC;
+    }
+    td {
+      font-size: 14px;
+    }
+  }
+
+  .no-data {
+    padding: 5px;
+    background: #E8E700;
+    font-family: 'monospace';
+    color: #000;
+    border-radius: 3px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .windower {
+    &.shown {
+      > .content {
+        display: block;
+      }
+      > .header {
+        h1,h2,h3,h4 {
+          background: #e8e700 !important;
+          color: #000;
+        }
+      }
+    }
+    > .header {
+      cursor: pointer;
+      h1,h2,h3,h4 {
+        background: #000;
+        color: #FFF;
+        border-radius: 5px;
+        text-align: center;
+        font-family: 'monospace';
+        padding: 10px;
+      }
+    }
+    > .content {
+      display: none;
+    }
+  }
+
+
+  .collection-wrap {
+
+    .links-wrap {
+      margin: 7%;
+      .link-item {
+        margin: 7%;
+      }
+    }
+    .schema-wrap {
+      margin: 7%;
+      .schema-item {
+        margin: 7%;
+      }
+    }
+  }
+}

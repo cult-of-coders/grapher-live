@@ -3,6 +3,7 @@ import brace from 'brace';
 import AceEditor from 'react-ace';
 import {createContainer} from 'meteor/react-meteor-data';
 import {Meteor} from 'meteor/meteor';
+import Documentation from './Documentation.jsx';
 
 import 'brace/mode/javascript';
 import 'brace/theme/github';
@@ -18,6 +19,7 @@ class Live extends React.Component {
         super();
 
         this.state = {
+            showDocs: false,
             loading: false,
             timeElapsed: null,
             result: null,
@@ -26,6 +28,13 @@ class Live extends React.Component {
             body: "{\n\t\n}",
             params: "{\n\t\n}"
         };
+    }
+
+    componentDidMount() {
+        var editor = ace.edit(document.getElementById('body'));
+        editor.getSession().setUseWorker(false);
+        editor = ace.edit(document.getElementById('params'));
+        editor.getSession().setUseWorker(false);
     }
 
     render() {
@@ -58,6 +67,10 @@ class Live extends React.Component {
                                         Bypass exposure firewall
                                     </span>
                                 </span>
+
+                                <button onClick={this.onDocsToggle.bind(this)} style={{ float: 'right', marginRight: 20 }}>
+                                    {this.state.showDocs ? 'Hide' : 'Show'} Docs
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -89,13 +102,16 @@ class Live extends React.Component {
                     </div>
                 </div>
                 <div className="right">
-                    <div className="grapher-live-results">
+                    <div className="grapher-live-results" style={{ display: this.state.showDocs ? 'none' : 'block' }}>
                         <LiveResults loading={this.state.loading}
                                      error={this.state.error}
                                      result={this.state.result}
                                      timeElapsed={this.state.timeElapsed}
                                      queryTimeElapsed={this.state.queryTimeElapsed}
                                  />
+                    </div>
+                    <div className="grapher-documentation" style={{ display: this.state.showDocs ? 'block' : 'nonde' }}>
+                        <Documentation />
                     </div>
                 </div>
             </div>
@@ -116,6 +132,12 @@ class Live extends React.Component {
         this.setState({params})
     }
 
+    onDocsToggle() {
+        this.setState({
+            showDocs: !this.state.showDocs
+        })
+    }
+
     onRun() {
         try {
             const body = eval('(' + this.state.body + ')');
@@ -123,7 +145,7 @@ class Live extends React.Component {
             const checkUser = this.state.checkUser;
             const start = new Date();
 
-            this.setState({loading: true});
+            this.setState({loading: true, showDocs: false});
 
             Meteor.call('grapher.live', {body, params, checkUser}, (error, response) => {
                 this.setState({loading: false});

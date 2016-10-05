@@ -1,4 +1,5 @@
 import './lib/grapher-live.less';
+import './lib/grapher-docs.less';
 import { checkNpmVersions } from 'meteor/tmeasday:check-npm-versions';
 
 checkNpmVersions({
@@ -9,3 +10,7 @@ checkNpmVersions({
 export {
     default as GrapherLive
 } from './lib/Live.jsx';
+
+export {
+    default as GrapherDocumentation
+} from './lib/Documentation.jsx';
