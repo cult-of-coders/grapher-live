@@ -15,7 +15,7 @@ Package.onUse(function(api) {
   api.use('ecmascript');
   api.use('tmeasday:check-npm-versions@0.3.1');
   api.use('react-meteor-data@0.2.9');
-  api.use('cultofcoders:grapher@1.1.6');
+  api.use('cultofcoders:grapher@1.1.8');
   api.use('less');
   api.imply('react-meteor-data@0.2.9');
 

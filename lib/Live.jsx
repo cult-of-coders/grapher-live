@@ -71,6 +71,9 @@ class Live extends React.Component {
                                 <button onClick={this.onDocsToggle.bind(this)} style={{ float: 'right', marginRight: 20 }}>
                                     {this.state.showDocs ? 'Hide' : 'Show'} Docs
                                 </button>
+                                <a href="http://grapher.cultofcoders.com" target="_blank" style={{ float: 'right', marginRight: 20, marginTop: 3 }}>
+                                    Grapher Guide
+                                </a>g
                             </div>
                         </div>
                     </div>
@@ -183,6 +186,12 @@ const LiveResults = ({loading, result, error, timeElapsed, queryTimeElapsed}) =>
         return <div className="vertical-center-wrap">
             <div className="vertical-center blank">
                 Run your query in the left and press the "Run" button on top or just write Ctrl+Enter or Cmd+Enter.
+                <br/>
+                <br/>
+                You can also checkout the Docs in the top right.
+                <br/>
+                <br/>
+                Checking "Bypass Exposure" will retrieve the full data graph without user restrictions.
             </div>
         </div>
     }
