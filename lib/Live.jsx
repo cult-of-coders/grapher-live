@@ -9,7 +9,7 @@ import 'brace/mode/javascript';
 import 'brace/theme/github';
 
 const editorOpts = {
-    $blockScrolling: false,
+    $blockScrolling: Infinity,
     showPrintMargin: false,
     fontSize: 18
 };
@@ -73,7 +73,7 @@ class Live extends React.Component {
                                 </button>
                                 <a href="http://grapher.cultofcoders.com" target="_blank" style={{ float: 'right', marginRight: 20, marginTop: 3 }}>
                                     Grapher Guide
-                                </a>g
+                                </a>
                             </div>
                         </div>
                     </div>

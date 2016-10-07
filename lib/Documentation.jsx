@@ -146,20 +146,69 @@ const DocumentationCollection = ({name, config}) => {
     )
 };
 
+const DocumentationNamedQuery = ({name, config}) => {
+    return (
+        <div className="collection-wrap">
+            <Window header={<h1>{name}</h1>}>
+                <DataDisplay data={{
+                    'Collection': config.collection,
+                    'Body': <pre>{JSON.stringify(config.body, null, 4)}</pre>,
+                    'Params': config.paramsSchema ? <pre>{JSON.stringify(config.paramsSchema, null, 4)}</pre> : 'Not Specified',
+                    'Is Exposed': config.isExposed ? 'Yes' : 'No'
+                }} />
+            </Window>
+        </div>
+    )
+};
+
 class Documentation extends Component {
+    constructor() {
+        super()
+
+        this.state = {
+            show: 'collections'
+        }
+    }
+
     render() {
-        const object = this.props.object;
+        const documentation = this.props.documentation;
 
         return (
             <div className="grapher-docs">
                 <h1>Grapher Documentation</h1>
-                {
-                    _.map(object, (config, collection) => {
-                        return <DocumentationCollection name={collection} config={config} key={collection} />
+
+                <button onClick={this.toggleShow.bind(this)}>
+                    {this.state.show === 'collections'
+                        ? 'Show Named Queries'
+                        : 'Show Collections'
+                    }
+                </button>
+                {this.state.show === 'collections'
+                    ?
+                    _.map(documentation.collections, (config, name) => {
+                        return <DocumentationCollection name={name} config={config} key={name} />
                     })
+                    :
+                    <div>
+                        <div className="explain">
+                            Named queries are called directly in the QUERY editor like:
+                            <pre>{`{ queryName: { params } }`}</pre>
+                        </div>
+                        {
+                            _.map(documentation.namedQueries, (config, name) => {
+                                return <DocumentationNamedQuery name={name} config={config} key={name} />
+                            })
+                        }
+                    </div>
                 }
             </div>
         )
+    }
+
+    toggleShow() {
+        this.setState({
+            show: (this.state.show === 'collections') ? 'namedQueries' : 'collections'
+        })
     }
 }
 
@@ -176,8 +225,9 @@ export default class extends Component {
     }
 
     render() {
-        if (this.state.res) {
-            return <Documentation object={this.state.res} />;
+        const documentation = this.state.res;
+        if (documentation) {
+            return <Documentation documentation={documentation} />;
         }
 
         return <div>Not Available</div>
