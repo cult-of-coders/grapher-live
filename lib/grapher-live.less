@@ -69,6 +69,13 @@
   top: 0;
   background: @background;
 
+  button {
+    background: #fff;
+    border: 1px solid #000000;
+    box-shadow: none;
+    padding: 6px 10px;
+  }
+
   .left {
     width: 50%;
     float: left;
@@ -86,11 +93,11 @@
   .grapher-top-bar {
     height: 10vh;
     min-height: 50px;
-    text-align: center;
+    padding-left: 40px;
     width: 100%;
     position: relative;
-    background: @background;
-    border-bottom: 1px solid #000;
+    background: #ffffff;
+    border-bottom: 2px solid #fbfbfb;
     font-family: monospace;
     color: #000;
     .title {
@@ -105,13 +112,6 @@
     }
     .run-query {
       margin-left: 20px;
-      padding: 6px 10px;
-      background: #000;
-      color: #FFF;
-      border: none;
-      border-radius: 4px;
-      display: inline-block;
-      box-shadow: none;
     }
     .logged-in {
       background: #000;
@@ -154,5 +154,14 @@
     color: #e2e2e2;
     text-transform: uppercase;
     font-family: monospace;
+  }
+}
+
+.ace_gutter {
+  .ace_layer {
+    background: #FFF;
+    .ace_gutter-cell {
+      color: #000;
+    }
   }
 }

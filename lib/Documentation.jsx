@@ -38,7 +38,9 @@ const DataDisplay = ({data}) => {
                     return (
                         <tr key={key}>
                             <th>{key}</th>
-                            <td>{value}</td>
+                            <td>
+                                {value}
+                            </td>
                         </tr>
                     );
                 })
@@ -133,6 +135,16 @@ const DocumentationCollection = ({name, config}) => {
     return (
         <div className="collection-wrap">
             <Window header={<h1>{name}</h1>}>
+                {config.isExposed
+                    ?
+                    <div>
+                        <DataDisplay data={{
+                            isExposed: config.isExposed ? 'Yes' : 'No',
+                            exposureBody: config.exposureBody ? <pre>{JSON.stringify(config.exposureBody, null, 4)}</pre> : undefined,
+                        }} />
+                    </div>
+                    : null
+                }
                 <div style={{overflow: 'hidden'}}>
                     <div style={{float: 'left', width: '50%'}}>
                         <DocumentationCollectionSchema name={name} config={config.schema} />
