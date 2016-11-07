@@ -1,9 +1,10 @@
 import React from 'react';
 import brace from 'brace';
 import AceEditor from 'react-ace';
-import {createContainer} from 'meteor/react-meteor-data';
-import {Meteor} from 'meteor/meteor';
+import { createContainer } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
 import Documentation from './Documentation.jsx';
+import { prepareForProcess } from 'meteor/cultofcoders:grapher';
 
 import 'brace/mode/javascript';
 import 'brace/theme/github';
@@ -143,7 +144,9 @@ class Live extends React.Component {
 
     onRun() {
         try {
-            const body = eval('(' + this.state.body + ')');
+            let body = eval('(' + this.state.body + ')');
+            body = prepareForProcess(body);
+
             const params = eval('(' + this.state.params + ')');
             const checkUser = this.state.checkUser;
             const start = new Date();
