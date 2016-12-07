@@ -11,7 +11,7 @@ Test your exposure security with a easy toggle.
 ```
 meteor add cultofcoders:grapher-live
 
-meteor npm install --save react react-ace
+meteor npm install --save react react-ace classnames 
 ```
 
 ### Server Side Setup
@@ -29,14 +29,17 @@ initialize(); // exposes a method "grapher_live", used by the React Component
 ```
 // client side expose a route using your router
 // example with FlowRouter
-// don't initialize this in production environment
 
-import { render } from 'react-dom';
+import React from 'react';
 import { GrapherLive } from 'meteor/cultofcoders:grapher-live';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import { mount } from 'react-mounter';
 
-FlowRouter.route('/grapher', () => {
-    render(<GrapherLive />, document.getElementById('app')); // where app is your main id to render stuff (you can also use "render-target")
-})
+FlowRouter.route('/grapher', {
+    action() {
+        mount(GrapherLive);
+    }
+});
 ```
 
 ### Usage

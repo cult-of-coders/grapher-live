@@ -1,6 +1,6 @@
 Package.describe({
   name: 'cultofcoders:grapher-live',
-  version: '1.2.4',
+  version: '1.2.5',
   // Brief, one-line summary of the package.
   summary: 'Grapher Live - Visualize your queries in the browser',
   // URL to the Git repository containing the source code for this package.
