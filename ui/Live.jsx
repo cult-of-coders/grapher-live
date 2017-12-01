@@ -68,10 +68,10 @@ class Live extends React.Component {
                                 </span>
 
                                 <button onClick={this.onDocsToggle.bind(this)} style={{ float: 'right', marginRight: 20 }}>
-                                    {this.state.showDocs ? 'Hide' : 'Show'} Docs
+                                    {this.state.showDocs ? 'Show Results' : 'Show Docs'}
                                 </button>
-                                <a href="http://grapher.cultofcoders.com" target="_blank" style={{ float: 'right', marginRight: 20, marginTop: 6 }}>
-                                    Grapher Guide
+                                <a href="https://github.com/cult-of-coders/grapher/blob/master/docs/index.md" target="_blank" style={{ float: 'right', marginRight: 20, marginTop: 6 }}>
+                                    Grapher Documentation
                                 </a>
                             </div>
                         </div>

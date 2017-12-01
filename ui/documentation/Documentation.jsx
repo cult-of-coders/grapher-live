@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import DocumentationCollection from './collections/Main';
 import DocumentationNamedQuery from './collections/NamedQuery';
+import classNames from 'classnames';
 
 class Documentation extends Component {
     constructor() {
         super();
 
         this.state = {
-            show: 'collections'
+            show: 'named_queries'
         }
     }
 
@@ -18,12 +19,18 @@ class Documentation extends Component {
             <div className="grapher-docs">
                 <h1>Grapher Documentation</h1>
 
-                <button onClick={this.toggleShow.bind(this)}>
-                    {this.state.show === 'collections'
-                        ? 'Show Named Queries'
-                        : 'Show Collections'
-                    }
+                <button onClick={() => this.setState({show: 'named_queries'})}
+                        className={classNames({active: (this.state.show == 'named_queries')})}
+                >
+                    Named Queries
                 </button>
+                {' '}
+                <button onClick={() => this.setState({show: 'collections'})}
+                        className={classNames({active: (this.state.show == 'collections')})}
+                >
+                    Show Collections
+                </button>
+
                 {this.state.show === 'collections'
                     ?
                     _.map(documentation.collections, (config, name) => {

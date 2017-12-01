@@ -2,9 +2,13 @@ import React from 'react';
 import classNames from 'classnames';
 
 export default class Window extends React.Component {
-    constructor() {
+    static defaultProps = {
+        opened: false,
+    };
+
+    constructor(props) {
         super();
-        this.state = { opened: false }
+        this.state = {opened: props.opened}
     }
 
     render() {

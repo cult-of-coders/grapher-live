@@ -1,5 +1,4 @@
 import './ui/styles/grapher-live.less';
-import './ui/styles/grapher-docs.less';
 
 export {
     default as GrapherLive

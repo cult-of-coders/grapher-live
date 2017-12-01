@@ -5,7 +5,6 @@
 
 .grapher-docs {
   position: relative;
-  font-family: 'monospace';
 
   > h1 {
     color: #e2e2e2;
@@ -14,13 +13,10 @@
     text-transform: uppercase;
     margin-top: 5px;
     font-size: 24px;
-    font-family: 'monospace';
   }
 
   table {
-    width: 90%;
-    margin: 5%;
-    border: 3px solid #444;
+    width: 100%;
     th {
       width: 50%;
       background: #777;
@@ -35,17 +31,9 @@
     }
   }
 
-  .explain {
-    background: rgba(255, 255, 0, 0.09);
-    padding: 15px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
-
   .no-data {
     padding: 5px;
-    background: #E8E700;
-    font-family: 'monospace';
+    background: #FFF;
     color: #000;
     border-radius: 3px;
     width: 100%;
@@ -56,11 +44,14 @@
     &.shown {
       > .content {
         display: block;
+        border: 1px solid #000;
+        margin-right: 5px;
+        margin-left: 5px;
       }
       > .header {
-        h1,h2,h3,h4 {
-          background: #e8e700 !important;
-          color: #000;
+        h1, h2, h3 {
+          background: blue;
+          color: #FFF;
         }
       }
     }
@@ -76,7 +67,6 @@
         background: #ececec;
         color: #000;
         text-align: center;
-        font-family: 'monospace';
         padding: 10px;
       }
     }
@@ -85,25 +75,20 @@
     }
   }
 
-
   .collection-wrap {
-
+    .content {
+      padding: 15px;
+    }
     .links-wrap {
-      margin: 7%;
       .link-item {
-        margin: 7%;
       }
     }
     .schema-wrap {
-      margin: 7%;
       .schema-item {
-        margin: 7%;
       }
     }
     .reducers-wrap {
-      margin: 3.5%;
       .reducer-item {
-        margin: 3.5%;
       }
     }
   }

@@ -14,13 +14,17 @@ export default ({loading, result, error, timeElapsed, queryTimeElapsed}) => {
     if (!result) {
         return <div className="vertical-center-wrap">
             <div className="vertical-center blank">
-                Run your query in the left and press the "Run" button on top or just write Ctrl+Enter or Cmd+Enter.
-                <br/>
-                <br/>
-                You can also checkout the Docs in the top right.
-                <br/>
-                <br/>
-                Checking "Bypass Exposure" will retrieve the full data graph without user restrictions.
+                <div className="explain">
+                    <p>
+                        Run your query in the left and press the <strong>Run</strong> button on top or just write Ctrl+Enter or Cmd+Enter.
+                    </p>
+                    <p>
+                        To view your current schema, click on <strong>Show Docs</strong> in the top right.
+                    </p>
+                    <p>
+                        Checking <strong>Bypass exposure firewall</strong> will retrieve the full data graph without user restrictions.
+                    </p>
+                </div>
             </div>
         </div>
     }
@@ -30,8 +34,10 @@ export default ({loading, result, error, timeElapsed, queryTimeElapsed}) => {
             <div className="insight">
                 <div className="vertical-center-wrap">
                     <div className="vertical-center">
-                        <div>Grapher execution time: {queryTimeElapsed} ms.</div>
-                        <div>Full response time: {timeElapsed} ms.</div>
+                        <div className="explain">
+                            <p>Grapher execution time: <strong>{queryTimeElapsed} ms</strong></p>
+                            <p>Full round-trip time: <strong>{timeElapsed} ms</strong></p>
+                        </div>
                     </div>
                 </div>
             </div>
