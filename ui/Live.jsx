@@ -59,13 +59,14 @@ class Live extends React.Component {
                                     ? <span className="logged-in">Logged in as: {user.emails[0].address}</span>
                                     : <span className="logged-in">Not logged in</span>
                                 }
-
+                                {!Meteor.isProduction &&
                                 <span className="check-user">
                                     <input type="checkbox" onChange={this.onCheckForUser.bind(this)} />
                                     <span>
                                         Bypass exposure firewall
                                     </span>
                                 </span>
+                                }}
 
                                 <button onClick={this.onDocsToggle.bind(this)} style={{ float: 'right', marginRight: 20 }}>
                                     {this.state.showDocs ? 'Show Results' : 'Show Docs'}
