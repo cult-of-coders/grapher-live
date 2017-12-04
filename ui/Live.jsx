@@ -66,7 +66,7 @@ class Live extends React.Component {
                                         Bypass exposure firewall
                                     </span>
                                 </span>
-                                }}
+                                }
 
                                 <button onClick={this.onDocsToggle.bind(this)} style={{ float: 'right', marginRight: 20 }}>
                                     {this.state.showDocs ? 'Show Results' : 'Show Docs'}
