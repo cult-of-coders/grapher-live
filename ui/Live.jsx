@@ -1,5 +1,5 @@
 import React from 'react';
-import { createContainer } from 'meteor/react-meteor-data';
+import { WithTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 
 import brace from 'brace';
@@ -175,8 +175,8 @@ class Live extends React.Component {
     }
 }
 
-export default createContainer(() => {
+export default withTracker(() => {
     return {
         user: Meteor.user ? Meteor.user() : null
     }
-}, Live)
+})(Live)
