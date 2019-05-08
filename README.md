@@ -15,7 +15,7 @@ meteor npm install --save-dev react react-mounter react-ace classnames
 ```
 
 ### Server Side Setup
-```
+``` JS
 // in your /imports/startup/server
 // don't initialize it in your production environment, or it will lead to unwanted data exposure.
 
@@ -26,7 +26,7 @@ initialize(); // exposes a method "grapher_live", used by the React Component
 
 
 ### Client Side Setup
-```
+``` JS
 import { mount } from 'react-mounter';
 import {GrapherLive} from 'meteor/cultofcoders:grapher-live';
 
@@ -44,7 +44,7 @@ FlowRouter.route('/grapher', {
 
 Grapher Live uses *createQuery*:
 
-```
+``` JS
 // query
 {
     tasks: {
